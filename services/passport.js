@@ -16,7 +16,9 @@ passport.deserializeUser((id, done) =>{
        });
 });
 
-passport.use(new GoogleStrategy({
+passport.use(
+    new GoogleStrategy(
+    {
         clientID : keys.googleClientID,
         clientSecret : keys.googleClientSecret,
         callbackURL : '/auth/google/callback'
@@ -26,8 +28,8 @@ passport.use(new GoogleStrategy({
             if(existingUser) {
                 done(null, existingUser);
             }
-            else {
-                new User({googleId: profile.Id})
+            else{
+                new User({googleId: profile.id})
                     .save()
                     .then(user => done(null, user));
                 }
