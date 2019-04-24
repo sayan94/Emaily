@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 require('./models/User');
 require('./services/passport');
 
@@ -18,10 +19,12 @@ app.use(
     })
 );
 
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authroutes')(app);
+require('./routes/billingRoutes')(app);
 
 const PORT = process.env.PORT || 5000
 
