@@ -7,7 +7,7 @@ class Header extends Component{
     renderContent(){
         switch(this.props.auth){
             case null:
-                return '';
+                return;
             case false:
                 return <li><a href="/auth/google">Sign in with Google</a></li>;
             default:
@@ -26,7 +26,7 @@ class Header extends Component{
             <nav>
                 <div className="nav-wrapper">
                     <Link
-                        to={this.props.auth ? '/surveys' : '/ '}
+                        to={this.props.auth ? '/surveys' : '/'}
                         className="left brand-logo"
                     >
                         Emaily
@@ -42,8 +42,8 @@ class Header extends Component{
 
 }
 
-function mapStateToProps(state){
-    return ({auth: state.auth})
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps)(Header);
